@@ -7,6 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { flush } from '@angular/core/testing';
+import { environment } from '../environment/environment';
 
 declare const Peer: any;
 @Component({
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
       console.log(this.currentUserName);
       mediaConnection.on('stream', (remoteMediaStream: any) => {
         navigator.mediaDevices
-          .getUserMedia({ video: { height: 200, width: 200 }, audio: true })
+          .getUserMedia({ video: { height: 400, width: 500 }, audio: true })
           .then((mediaStream) => {
             this.remoteUserMediaStream = remoteMediaStream;
             if (this.remoteUserVideo && this.remoteUserVideo.nativeElement) {
@@ -70,7 +71,7 @@ export class AppComponent implements OnInit {
 
     call.on('stream', (remoteMediaStream: any) => {
       navigator.mediaDevices
-        .getUserMedia({ video: { height: 200, width: 200 }, audio: true })
+        .getUserMedia({ video: { height: 400, width: 500 }, audio: true })
         .then((mediaStream) => {
           this.remoteUserMediaStream = remoteMediaStream;
           if (this.remoteUserVideo && this.remoteUserVideo.nativeElement) {
@@ -89,7 +90,7 @@ export class AppComponent implements OnInit {
   toggleCamera() {
     this.currentUserCameraOn = !this.currentUserCameraOn;
     navigator.mediaDevices
-      .getUserMedia({ video: { height: 200, width: 200 }, audio: true })
+      .getUserMedia({ video: { height: 400, width: 500 }, audio: true })
       .then((mediaStream) => {
         this.currentUserMediaStream = mediaStream;
         if (this.currentUserVideo && this.currentUserVideo.nativeElement) {
@@ -99,5 +100,9 @@ export class AppComponent implements OnInit {
           // this.currentUserVideo.nativeElement. = undefined;
         }
       });
+  }
+
+  copyInviteLink() {
+    navigator.clipboard.writeText(environment.app_url  + this.currentUserPeerId);
   }
 }
