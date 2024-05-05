@@ -33,11 +33,12 @@ export class AppComponent implements OnInit {
       this.currentUserPeerId = id;
     });
 
+    // 6999d392-dad9-4dd7-83de-f2e9c25a0df8
     this.peer.on('call', (mediaConnection: any) => {
       mediaConnection.answer(this.currentUserMediaStream);
       mediaConnection.on('stream', (remoteMediaStream: any) => {
         navigator.mediaDevices
-          .getUserMedia({ video: { height: 400, width: 500 }, audio: true })
+          .getUserMedia({ video: { height: 400, width: 500 }, audio: false })
           .then((mediaStream) => {
             this.remoteUserMediaStream = remoteMediaStream;
             if (this.remoteUserVideo && this.remoteUserVideo.nativeElement) {
@@ -56,7 +57,7 @@ export class AppComponent implements OnInit {
       this.remoteUserPeerId,
       this.currentUserMediaStream
     );
-    var conn = this.peer.connect(this.remoteUserPeerId);
+    // var conn = this.peer.connect(this.remoteUserPeerId);
 
     call.on('stream', (remoteMediaStream: any) => {
       navigator.mediaDevices
@@ -77,6 +78,7 @@ export class AppComponent implements OnInit {
       .getUserMedia({ video: { height: 400, width: 500 }, audio: true })
       .then((mediaStream) => {
         this.currentUserMediaStream = mediaStream;
+        console.log(this.currentUserMediaStream)
         if (this.currentUserVideo && this.currentUserVideo.nativeElement) {
           this.currentUserVideo.nativeElement.srcObject = this.currentUserMediaStream;
         }

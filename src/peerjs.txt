@@ -13,4 +13,6 @@ Step4: Call User with the remote peer id and the current user media stream
 
 Step5: Listen for the call event and answer the call in ngOnInit()
 
-Step6: After receving call use stream event to send your stream to the sender
+Step6: After receiving call use stream event to send your stream to the sender
+
+Step7: The Sender Will receive your stream
