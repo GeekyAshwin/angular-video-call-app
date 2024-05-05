@@ -45,8 +45,6 @@ export class AppComponent implements OnInit {
             if (this.remoteUserVideo && this.remoteUserVideo.nativeElement) {
               this.remoteUserVideo.nativeElement.srcObject =
                 this.remoteUserMediaStream;
-            } else {
-              // this.currentUserVideo.nativeElement. = undefined;
             }
           });
         // `stream` is the MediaStream of the remote peer.
@@ -54,8 +52,6 @@ export class AppComponent implements OnInit {
       });
     });
   }
-
-  setCurrentUserVideo(mediaStream: MediaStream) {}
 
   call() {
     var call = this.peer.call(
@@ -94,10 +90,7 @@ export class AppComponent implements OnInit {
       .then((mediaStream) => {
         this.currentUserMediaStream = mediaStream;
         if (this.currentUserVideo && this.currentUserVideo.nativeElement) {
-          this.currentUserVideo.nativeElement.srcObject =
-            this.currentUserMediaStream;
-        } else {
-          // this.currentUserVideo.nativeElement. = undefined;
+          this.currentUserVideo.nativeElement.srcObject = this.currentUserMediaStream;
         }
       });
   }
