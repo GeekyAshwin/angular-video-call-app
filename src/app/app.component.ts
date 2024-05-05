@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
     null;
   public remoteUserMediaStream: MediaStream | null = null;
   public currentUserCameraOn: boolean = false;
-  public currentUserName: string = '';
 
   @ViewChild('currentUserVideo') currentUserVideo: ElementRef | undefined;
   @ViewChild('remoteUserVideo') remoteUserVideo: ElementRef | undefined;
@@ -36,7 +35,6 @@ export class AppComponent implements OnInit {
 
     this.peer.on('call', (mediaConnection: any) => {
       mediaConnection.answer(this.currentUserMediaStream);
-      console.log(this.currentUserName);
       mediaConnection.on('stream', (remoteMediaStream: any) => {
         navigator.mediaDevices
           .getUserMedia({ video: { height: 400, width: 500 }, audio: true })
@@ -59,11 +57,6 @@ export class AppComponent implements OnInit {
       this.currentUserMediaStream
     );
     var conn = this.peer.connect(this.remoteUserPeerId);
-    // on open will be launch when you successfully connect to PeerServer
-    conn.on('open', function () {
-      // here you have conn.id
-      conn.send('hi!');
-    });
 
     call.on('stream', (remoteMediaStream: any) => {
       navigator.mediaDevices
@@ -73,17 +66,12 @@ export class AppComponent implements OnInit {
           if (this.remoteUserVideo && this.remoteUserVideo.nativeElement) {
             this.remoteUserVideo.nativeElement.srcObject =
               this.remoteUserMediaStream;
-          } else {
-            // this.currentUserVideo.nativeElement. = undefined;
           }
         });
-
-      // `stream` is the MediaStream of the remote peer.
-      // Here you'd add it to an HTML video/canvas element.
     });
   }
 
-  toggleCamera() {
+  openCamera() {
     this.currentUserCameraOn = !this.currentUserCameraOn;
     navigator.mediaDevices
       .getUserMedia({ video: { height: 400, width: 500 }, audio: true })
@@ -95,7 +83,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  copyInviteLink() {
-    navigator.clipboard.writeText(environment.app_url  + this.currentUserPeerId);
+  copyInviteCode() {
+    navigator.clipboard.writeText(this.currentUserPeerId);
   }
 }

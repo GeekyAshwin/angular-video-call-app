@@ -1,0 +1,16 @@
+# Peer JS Working
+
+
+Step1: Add the CDN in index.js
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+
+Step2: Create instance of Peer
+  const peer = new Peer();
+
+Step3: Get current user media permissions
+
+Step4: Call User with the remote peer id and the current user media stream
+
+Step5: Listen for the call event and answer the call in ngOnInit()
+
+Step6: After receving call use stream event to send your stream to the sender
