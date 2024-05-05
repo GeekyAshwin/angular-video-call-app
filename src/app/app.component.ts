@@ -42,15 +42,15 @@ export class AppComponent implements OnInit, AfterViewInit {
       mediaConnection.answer(this.currentUserMediaStream);
       console.log('answer called');
 
-      mediaConnection.on('stream', () => {
+      mediaConnection.on('stream', (remoteMediaStream: any) => {
         console.log('stream code here');
+        console.log(remoteMediaStream)
         navigator.mediaDevices
           .getUserMedia({ video: { height: 200, width: 200 }, audio: true })
           .then((mediaStream) => {
-            this.remoteUserMediaStream = mediaStream;
+            this.remoteUserMediaStream = remoteMediaStream;
             if (this.remoteUserVideo && this.remoteUserVideo.nativeElement) {
-              this.remoteUserVideo.nativeElement.srcObject =
-                this.remoteUserMediaStream;
+              this.remoteUserVideo.nativeElement.srcObject = this.remoteUserMediaStream;
             } else {
               // this.currentUserVideo.nativeElement. = undefined;
             }
