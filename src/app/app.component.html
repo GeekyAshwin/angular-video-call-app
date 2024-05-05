@@ -1,16 +1,44 @@
-<h1>Your Peer ID: {{ currentUserPeerId }}</h1>
-<label for="peer-id">Enter the Peer Id of the room to connect</label>
-<input type="text" [(ngModel)]="remoteUserPeerId">
-<button (click)="call()">Call</button>
-<button (click)="toggleCamera()">Toggle Your Camera</button>
-
-
-<div class="video-container">
-  <div *ngIf="currentUserCameraOn" class="current-user-video-section">
-    <video src="" id="current-user-video" autoplay #currentUserVideo></video>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12">
+      <h1 class="text-center">Angular Video Call App</h1>
+    </div>
   </div>
-  <div class="remote-user-video-section">
-    <video src="" id="remote-user-video" autoplay #remoteUserVideo></video>
+  <div class="max-w-sm mx-auto mt-5">
+    <h3>Your Peer ID: <b>{{ currentUserPeerId }}</b> </h3>
+    <div>
+      <input class="form-control" placeholder="Enter the Peer Id of the room to connect" type="text"
+        [(ngModel)]="remoteUserPeerId">
+        <input class="form-control" placeholder="Enter your name" type="text"
+        [(ngModel)]="currentUserName">
+      <div>
+        <button class="btn btn-success mt-2" (click)="call()">Call</button>
+      </div>
+      <div>
+        <button class="btn btn-secondary mt-2" (click)="toggleCamera()">Toggle Your Camera</button>
+      </div>
+    </div>
+    <div class="container video-container mt-5">
+      <div class="row">
+        <div class="col-6 object-fit-contain border rounded current-user-video-section">
+          <div>
+            <label class="text-center" for="">You</label>
+          </div>
+          <video *ngIf="currentUserCameraOn" class="object-fit-contain border rounded col-6" src=""
+            id="current-user-video" autoplay #currentUserVideo></video>
+          <video *ngIf="!currentUserCameraOn" class="object-fit-contain border rounded col-6" src=""></video>
+        </div>
+        <div class="col-6 object-fit-contain border rounded remote-user-video-section">
+          <div>
+            <label class="text-center" for="">Your friend</label>
+          </div>
+          <video class="object-fit-contain border rounded col-6" src="" id="remote-user-video col-6" autoplay
+            #remoteUserVideo></video>
+          <div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <router-outlet />
